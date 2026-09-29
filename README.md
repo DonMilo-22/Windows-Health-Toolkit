@@ -41,3 +41,7 @@ PowerShell functions, CIM queries, pipelines, calculated properties, JSON serial
 ## 📄 License
 
 MIT.
+
+## 🆕 Recent changes
+
+- Added a `-Top` option to choose how many CPU and memory-heavy processes are displayed.
