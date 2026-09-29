@@ -1,4 +1,7 @@
-param([string]$ExportJson)
+param(
+  [string]$ExportJson,
+  [ValidateRange(1,50)][int]$Top = 5
+)
 
 $os = Get-CimInstance Win32_OperatingSystem
 $cs = Get-CimInstance Win32_ComputerSystem
@@ -18,8 +21,8 @@ $report = [pscustomobject]@{
   Uptime_Hours=[math]::Round(((Get-Date)-$os.LastBootUpTime).TotalHours,1)
   Disks=$disks
   Network=$network
-  TopCPU=Get-Process | Sort-Object CPU -Descending | Select-Object -First 5 Name,Id,@{N="CPU_s";E={[math]::Round($_.CPU,1)}}
-  TopMemory=Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 5 Name,Id,@{N="RAM_MB";E={[math]::Round($_.WorkingSet64/1MB,1)}}
+  TopCPU=Get-Process | Sort-Object CPU -Descending | Select-Object -First $Top Name,Id,@{N="CPU_s";E={[math]::Round($_.CPU,1)}}
+  TopMemory=Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First $Top Name,Id,@{N="RAM_MB";E={[math]::Round($_.WorkingSet64/1MB,1)}}
 }
 
 Write-Host "`nWindows Health Toolkit" -ForegroundColor Cyan
@@ -33,8 +36,8 @@ Write-Host "`nDisks" -ForegroundColor Yellow
 $report.Disks | Format-Table -AutoSize
 Write-Host "Network" -ForegroundColor Yellow
 $report.Network | Format-Table -AutoSize
-Write-Host "Top CPU processes" -ForegroundColor Yellow
+Write-Host "Top $Top CPU processes" -ForegroundColor Yellow
 $report.TopCPU | Format-Table -AutoSize
-Write-Host "Top memory processes" -ForegroundColor Yellow
+Write-Host "Top $Top memory processes" -ForegroundColor Yellow
 $report.TopMemory | Format-Table -AutoSize
 if ($ExportJson) { $report | ConvertTo-Json -Depth 5 | Set-Content -Path $ExportJson -Encoding UTF8; Write-Host "Report exported to $ExportJson" -ForegroundColor Green }
