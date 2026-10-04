@@ -44,4 +44,10 @@ MIT.
 
 ## 🆕 Recent changes
 
+### 2026-10-04
+
+- Added a warning when any local disk has less than 15% free space.
+
+### Previous update
+
 - Added a `-Top` option to choose how many CPU and memory-heavy processes are displayed.
