@@ -34,6 +34,7 @@ Write-Host "RAM:      $($report.RAM_GB) GB total / $($report.RAM_Free_GB) GB fre
 Write-Host "Uptime:   $($report.Uptime_Hours) hours"
 Write-Host "`nDisks" -ForegroundColor Yellow
 $report.Disks | Format-Table -AutoSize
+$report.Disks | Where-Object { $_.FreePercent -lt 15 } | ForEach-Object { Write-Warning "Low disk space on $($_.Drive): $($_.FreePercent)% free" }
 Write-Host "Network" -ForegroundColor Yellow
 $report.Network | Format-Table -AutoSize
 Write-Host "Top $Top CPU processes" -ForegroundColor Yellow
