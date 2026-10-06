@@ -18,6 +18,7 @@ $report = [pscustomobject]@{
   CPU=$cpu.Name
   RAM_GB=[math]::Round($cs.TotalPhysicalMemory/1GB,2)
   RAM_Free_GB=[math]::Round($os.FreePhysicalMemory/1MB,2)
+  RAM_Used_Percent=[math]::Round((1-($os.FreePhysicalMemory*1KB/$cs.TotalPhysicalMemory))*100,1)
   Uptime_Hours=[math]::Round(((Get-Date)-$os.LastBootUpTime).TotalHours,1)
   Disks=$disks
   Network=$network
@@ -30,7 +31,7 @@ Write-Host "======================"
 Write-Host "PC:       $($report.Computer)"
 Write-Host "Windows:  $($report.Windows) $($report.Version)"
 Write-Host "CPU:      $($report.CPU)"
-Write-Host "RAM:      $($report.RAM_GB) GB total / $($report.RAM_Free_GB) GB free"
+Write-Host "RAM:      $($report.RAM_GB) GB total / $($report.RAM_Free_GB) GB free / $($report.RAM_Used_Percent)% used"
 Write-Host "Uptime:   $($report.Uptime_Hours) hours"
 Write-Host "`nDisks" -ForegroundColor Yellow
 $report.Disks | Format-Table -AutoSize
