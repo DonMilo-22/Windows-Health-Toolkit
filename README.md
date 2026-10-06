@@ -44,6 +44,12 @@ MIT.
 
 ## 🆕 Recent changes
 
+### 2026-10-05
+
+- Added the current RAM usage percentage to the system summary.
+
+### 2026-10-04
+
 ### 2026-10-04
 
 - Added a warning when any local disk has less than 15% free space.
