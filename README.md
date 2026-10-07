@@ -44,11 +44,13 @@ MIT.
 
 ## 🆕 Recent changes
 
+### 2026-10-06
+
+- Added a report generation timestamp, including in JSON exports.
+
 ### 2026-10-05
 
 - Added the current RAM usage percentage to the system summary.
-
-### 2026-10-04
 
 ### 2026-10-04
 
