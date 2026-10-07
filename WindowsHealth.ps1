@@ -12,6 +12,7 @@ $disks = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Objec
 $network = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue | Where-Object { $_.IPAddress -notlike "169.254*" -and $_.InterfaceAlias -notlike "*Loopback*" } | Select-Object InterfaceAlias,IPAddress
 
 $report = [pscustomobject]@{
+  GeneratedAt=(Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
   Computer=$env:COMPUTERNAME
   Windows=$os.Caption
   Version=$os.Version
@@ -28,6 +29,7 @@ $report = [pscustomobject]@{
 
 Write-Host "`nWindows Health Toolkit" -ForegroundColor Cyan
 Write-Host "======================"
+Write-Host "Generated: $($report.GeneratedAt)"
 Write-Host "PC:       $($report.Computer)"
 Write-Host "Windows:  $($report.Windows) $($report.Version)"
 Write-Host "CPU:      $($report.CPU)"
