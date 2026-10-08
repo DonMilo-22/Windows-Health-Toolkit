@@ -44,6 +44,10 @@ MIT.
 
 ## 🆕 Recent changes
 
+### 2026-10-07
+
+- Added operating system architecture to both the console summary and JSON report.
+
 ### 2026-10-06
 
 - Added a report generation timestamp, including in JSON exports.
