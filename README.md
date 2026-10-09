@@ -44,6 +44,10 @@ MIT.
 
 ## 🆕 Recent changes
 
+### 2026-10-08
+
+- Added the last boot timestamp alongside uptime in the system report.
+
 ### 2026-10-07
 
 - Added operating system architecture to both the console summary and JSON report.
