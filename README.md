@@ -44,6 +44,10 @@ MIT.
 
 ## 🆕 Recent changes
 
+### 2026-10-09
+
+- Added the number of logical processors to the hardware summary and JSON report.
+
 ### 2026-10-08
 
 - Added the last boot timestamp alongside uptime in the system report.
