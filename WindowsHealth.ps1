@@ -18,6 +18,7 @@ $report = [pscustomobject]@{
   Version=$os.Version
   Architecture=$os.OSArchitecture
   CPU=$cpu.Name
+  LogicalProcessors=$cs.NumberOfLogicalProcessors
   RAM_GB=[math]::Round($cs.TotalPhysicalMemory/1GB,2)
   RAM_Free_GB=[math]::Round($os.FreePhysicalMemory/1MB,2)
   RAM_Used_Percent=[math]::Round((1-($os.FreePhysicalMemory*1KB/$cs.TotalPhysicalMemory))*100,1)
@@ -35,6 +36,7 @@ Write-Host "Generated: $($report.GeneratedAt)"
 Write-Host "PC:       $($report.Computer)"
 Write-Host "Windows:  $($report.Windows) $($report.Version) ($($report.Architecture))"
 Write-Host "CPU:      $($report.CPU)"
+Write-Host "Threads:  $($report.LogicalProcessors) logical processors"
 Write-Host "RAM:      $($report.RAM_GB) GB total / $($report.RAM_Free_GB) GB free / $($report.RAM_Used_Percent)% used"
 Write-Host "Last boot: $($report.LastBoot)"
 Write-Host "Uptime:   $($report.Uptime_Hours) hours"
