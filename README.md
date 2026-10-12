@@ -47,6 +47,10 @@ Desarrollado por [DonMilo-22](https://github.com/DonMilo-22).
 
 Licencia: MIT.
 
+## Actualización 2026-10-12
+
+- Added the number of detected IPv4 addresses to the network summary.
+
 ## Historial
 
 Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
