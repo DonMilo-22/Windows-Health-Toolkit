@@ -1,73 +1,52 @@
-# 🩺 Windows Health Toolkit
+# Windows Health Toolkit
 
-> Quick Windows diagnostics from PowerShell.
+Informe local de recursos de Windows desde PowerShell.
 
-![PowerShell](https://img.shields.io/badge/PowerShell-7%2B-5391FE?logo=powershell&logoColor=white)
-![Windows](https://img.shields.io/badge/platform-Windows-0078D4?logo=windows)
-![License](https://img.shields.io/badge/license-MIT-green)
+Reúne información del equipo, memoria, discos, red y procesos en una ejecución, con exportación JSON opcional.
 
-Windows Health Toolkit collects useful system information in one run: hardware, memory, disks, network, uptime and resource-heavy processes.
+## Funciones actuales
 
-## ✨ Features
+- Equipo, Windows, arquitectura, CPU y procesadores lógicos.
+- RAM total, libre y porcentaje usado.
+- Fecha del informe, último arranque y horas encendido.
+- Espacio de discos locales y aviso si queda menos de 15% libre.
+- Direcciones IPv4 y procesos con mayor CPU acumulada o memoria actual.
+- Número configurable de procesos y exportación a JSON.
 
-- Computer and Windows information
-- RAM usage
-- Disk health overview
-- IPv4 network information
-- Top CPU and memory processes
-- Optional JSON export
-- Human-readable console report
+## Requisitos
 
-## 🚀 Run
+Windows y PowerShell 7 o superior (`pwsh`), con los cmdlets CIM y `Get-NetIPAddress` disponibles. El script utiliza interfaces de Windows; no es multiplataforma.
+
+## Instalación y uso
 
 ```powershell
+git clone https://github.com/DonMilo-22/Windows-Health-Toolkit.git
+cd Windows-Health-Toolkit
 pwsh ./WindowsHealth.ps1
+pwsh ./WindowsHealth.ps1 -Top 10 -ExportJson report.json
 ```
 
-Export the report:
+## Opciones
 
-```powershell
-pwsh ./WindowsHealth.ps1 -ExportJson report.json
-```
+| Parámetro | Predeterminado | Uso |
+|---|---|---|
+| `-Top <n>` | `5` | Entre 1 y 50 procesos por clasificación. |
+| `-ExportJson <ruta>` | Sin exportación | Guarda el informe como JSON. |
 
-## 🔐 Permissions
+## Almacenamiento y permisos
 
-Most checks work as a regular user. Running PowerShell as Administrator may expose additional system details depending on Windows configuration.
+Solo escribe un archivo si se indica `-ExportJson`; una ruta relativa se resuelve desde el directorio de trabajo. Las consultas suelen funcionar con usuario normal; algunos detalles pueden depender de permisos y configuración de Windows.
 
-## 🧠 What it demonstrates
+## Límites y comprobaciones
 
-PowerShell functions, CIM queries, pipelines, calculated properties, JSON serialization and practical Windows administration.
+Es una fotografía del sistema, no monitoreo continuo. `CPU_s` representa segundos de CPU acumulados por proceso, no porcentaje instantáneo. El apartado de discos mide espacio, no salud SMART. Ejecuta el script y compara el informe de consola con el JSON para revisar la exportación en tu equipo.
 
-## 📄 License
+## Autor y licencia
 
-MIT.
+Desarrollado por [DonMilo-22](https://github.com/DonMilo-22).
 
-## 🆕 Recent changes
+Licencia: MIT.
 
-### 2026-10-09
+## Historial
 
-- Added the number of logical processors to the hardware summary and JSON report.
-
-### 2026-10-08
-
-- Added the last boot timestamp alongside uptime in the system report.
-
-### 2026-10-07
-
-- Added operating system architecture to both the console summary and JSON report.
-
-### 2026-10-06
-
-- Added a report generation timestamp, including in JSON exports.
-
-### 2026-10-05
-
-- Added the current RAM usage percentage to the system summary.
-
-### 2026-10-04
-
-- Added a warning when any local disk has less than 15% free space.
-
-### Previous update
-
-- Added a `-Top` option to choose how many CPU and memory-heavy processes are displayed.
+Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
