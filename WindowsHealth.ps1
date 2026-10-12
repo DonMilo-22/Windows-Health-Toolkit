@@ -26,6 +26,7 @@ $report = [pscustomobject]@{
   Uptime_Hours=[math]::Round(((Get-Date)-$os.LastBootUpTime).TotalHours,1)
   Disks=$disks
   Network=$network
+  IPv4_Count=@($network).Count
   TopCPU=Get-Process | Sort-Object CPU -Descending | Select-Object -First $Top Name,Id,@{N="CPU_s";E={[math]::Round($_.CPU,1)}}
   TopMemory=Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First $Top Name,Id,@{N="RAM_MB";E={[math]::Round($_.WorkingSet64/1MB,1)}}
 }
@@ -43,6 +44,7 @@ Write-Host "Uptime:   $($report.Uptime_Hours) hours"
 Write-Host "`nDisks" -ForegroundColor Yellow
 $report.Disks | Format-Table -AutoSize
 $report.Disks | Where-Object { $_.FreePercent -lt 15 } | ForEach-Object { Write-Warning "Low disk space on $($_.Drive): $($_.FreePercent)% free" }
+Write-Host "IPv4 addresses: $($report.IPv4_Count)"
 Write-Host "Network" -ForegroundColor Yellow
 $report.Network | Format-Table -AutoSize
 Write-Host "Top $Top CPU processes" -ForegroundColor Yellow
