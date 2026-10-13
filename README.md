@@ -51,6 +51,10 @@ Licencia: MIT.
 
 - Added the number of detected IPv4 addresses to the network summary.
 
+## Actualización adicional 2026-10-12
+
+- Added the Windows installation date to the collected system report.
+
 ## Historial
 
 Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
