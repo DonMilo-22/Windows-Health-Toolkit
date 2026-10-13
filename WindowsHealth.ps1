@@ -16,6 +16,7 @@ $report = [pscustomobject]@{
   Computer=$env:COMPUTERNAME
   Windows=$os.Caption
   Version=$os.Version
+  InstallDate=$os.InstallDate
   Architecture=$os.OSArchitecture
   CPU=$cpu.Name
   LogicalProcessors=$cs.NumberOfLogicalProcessors
@@ -36,6 +37,7 @@ Write-Host "======================"
 Write-Host "Generated: $($report.GeneratedAt)"
 Write-Host "PC:       $($report.Computer)"
 Write-Host "Windows:  $($report.Windows) $($report.Version) ($($report.Architecture))"
+Write-Host "Installed: $($report.InstallDate)"
 Write-Host "CPU:      $($report.CPU)"
 Write-Host "Threads:  $($report.LogicalProcessors) logical processors"
 Write-Host "RAM:      $($report.RAM_GB) GB total / $($report.RAM_Free_GB) GB free / $($report.RAM_Used_Percent)% used"
