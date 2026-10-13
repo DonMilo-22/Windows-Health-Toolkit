@@ -55,6 +55,8 @@ Licencia: MIT.
 
 - Added the Windows installation date to the collected system report.
 
+- Added the Windows installation date to the collected system report.
+
 ## Historial
 
 Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
