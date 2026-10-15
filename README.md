@@ -60,3 +60,7 @@ Licencia: MIT.
 ## Historial
 
 Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
+
+## Actualización 2026-10-14
+
+- Added a RAM status field that flags memory usage at 90% or higher in the console report and JSON export.
