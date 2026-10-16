@@ -64,3 +64,7 @@ Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
 ## Actualización 2026-10-14
 
 - Added a RAM status field that flags memory usage at 90% or higher in the console report and JSON export.
+
+## Actualización 2026-10-15
+
+- The report now counts drives with less than 15% free space.
