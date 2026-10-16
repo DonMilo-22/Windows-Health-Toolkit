@@ -27,6 +27,7 @@ $report = [pscustomobject]@{
   LastBoot=$os.LastBootUpTime.ToString("yyyy-MM-dd HH:mm:ss")
   Uptime_Hours=[math]::Round(((Get-Date)-$os.LastBootUpTime).TotalHours,1)
   Disks=$disks
+  LowSpaceDriveCount=@($disks | Where-Object { $_.FreePercent -lt 15 }).Count
   Network=$network
   IPv4_Count=@($network).Count
   TopCPU=Get-Process | Sort-Object CPU -Descending | Select-Object -First $Top Name,Id,@{N="CPU_s";E={[math]::Round($_.CPU,1)}}
@@ -47,6 +48,7 @@ Write-Host "Last boot: $($report.LastBoot)"
 Write-Host "Uptime:   $($report.Uptime_Hours) hours"
 Write-Host "`nDisks" -ForegroundColor Yellow
 $report.Disks | Format-Table -AutoSize
+Write-Host "Drives with low free space: $($report.LowSpaceDriveCount)"
 $report.Disks | Where-Object { $_.FreePercent -lt 15 } | ForEach-Object { Write-Warning "Low disk space on $($_.Drive): $($_.FreePercent)% free" }
 Write-Host "IPv4 addresses: $($report.IPv4_Count)"
 Write-Host "Network" -ForegroundColor Yellow
