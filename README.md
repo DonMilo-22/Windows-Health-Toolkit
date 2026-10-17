@@ -68,3 +68,8 @@ Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
 ## Actualización 2026-10-15
 
 - The report now counts drives with less than 15% free space.
+
+
+## Actualización 2026-10-16
+
+- The report now includes battery charge/status when a battery is detected; desktop systems without a battery show `Not detected`.
