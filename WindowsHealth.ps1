@@ -5,7 +5,7 @@ param(
 
 $os = Get-CimInstance Win32_OperatingSystem
 $cs = Get-CimInstance Win32_ComputerSystem
-$cpu = Get-CimInstance Win32_Processor | Select-Object -First 1
+$cpu = Get-CimInstance Win32_Processor | Select-Object -First 1\n$battery = Get-CimInstance Win32_Battery -ErrorAction SilentlyContinue | Select-Object -First 1
 $disks = Get-CimInstance Win32_LogicalDisk -Filter "DriveType=3" | ForEach-Object {
   [pscustomobject]@{ Drive=$_.DeviceID; SizeGB=[math]::Round($_.Size/1GB,2); FreeGB=[math]::Round($_.FreeSpace/1GB,2); FreePercent=if($_.Size){[math]::Round(($_.FreeSpace/$_.Size)*100,1)}else{0} }
 }
@@ -23,7 +23,7 @@ $report = [pscustomobject]@{
   RAM_GB=[math]::Round($cs.TotalPhysicalMemory/1GB,2)
   RAM_Free_GB=[math]::Round($os.FreePhysicalMemory/1MB,2)
   RAM_Used_Percent=[math]::Round((1-($os.FreePhysicalMemory*1KB/$cs.TotalPhysicalMemory))*100,1)
-  RAM_Status=if((1-($os.FreePhysicalMemory*1KB/$cs.TotalPhysicalMemory))*100 -ge 90){"High memory use"}else{"Normal"}
+  RAM_Status=if((1-($os.FreePhysicalMemory*1KB/$cs.TotalPhysicalMemory))*100 -ge 90){"High memory use"}else{"Normal"}\n  Battery_Status=if($battery){"$($battery.EstimatedChargeRemaining)% remaining; $($battery.BatteryStatus)"}else{"Not detected"}
   LastBoot=$os.LastBootUpTime.ToString("yyyy-MM-dd HH:mm:ss")
   Uptime_Hours=[math]::Round(((Get-Date)-$os.LastBootUpTime).TotalHours,1)
   Disks=$disks
@@ -43,7 +43,7 @@ Write-Host "Installed: $($report.InstallDate)"
 Write-Host "CPU:      $($report.CPU)"
 Write-Host "Threads:  $($report.LogicalProcessors) logical processors"
 Write-Host "RAM:      $($report.RAM_GB) GB total / $($report.RAM_Free_GB) GB free / $($report.RAM_Used_Percent)% used"
-Write-Host "RAM status: $($report.RAM_Status)"
+Write-Host "RAM status: $($report.RAM_Status)"\nWrite-Host "Battery:   $($report.Battery_Status)"
 Write-Host "Last boot: $($report.LastBoot)"
 Write-Host "Uptime:   $($report.Uptime_Hours) hours"
 Write-Host "`nDisks" -ForegroundColor Yellow
