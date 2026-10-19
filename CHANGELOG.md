@@ -1,3 +1,8 @@
+
+
+### 2026-10-18
+
+- Added `tools/HealthThresholdReport.ps1` to check saved health reports against configurable RAM and disk-space thresholds.
 # Historial de cambios
 
 Entradas originales conservadas en inglés. Las fechas corresponden al historial existente; la última entrada no tenía fecha registrada.
