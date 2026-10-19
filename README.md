@@ -73,3 +73,16 @@ Consulta [CHANGELOG.md](CHANGELOG.md) para ver las actualizaciones.
 ## Actualización 2026-10-16
 
 - The report now includes battery charge/status when a battery is detected; desktop systems without a battery show `Not detected`.
+
+
+## New utility: report threshold check
+
+Generate a JSON report, then check whether RAM usage or disk free space has crossed a chosen threshold:
+
+```powershell
+pwsh ./WindowsHealth.ps1 -ExportJson report.json
+pwsh ./tools/HealthThresholdReport.ps1 -ReportPath report.json
+pwsh ./tools/HealthThresholdReport.ps1 -ReportPath report.json -RamLimit 85 -DiskFreeLimit 20
+```
+
+The helper reads an existing report and prints warnings without changing system settings or files. It returns exit code `2` when a threshold is exceeded, which is useful in scripts.
