@@ -86,3 +86,15 @@ pwsh ./tools/HealthThresholdReport.ps1 -ReportPath report.json -RamLimit 85 -Dis
 ```
 
 The helper reads an existing report and prints warnings without changing system settings or files. It returns exit code `2` when a threshold is exceeded, which is useful in scripts.
+
+
+## New utility: top RAM-consuming processes
+
+List the processes using the most memory:
+
+```powershell
+pwsh ./tools/Get-TopProcesses.ps1
+pwsh ./tools/Get-TopProcesses.ps1 -Count 5
+```
+
+The read-only helper reports process name, RAM in MiB and process ID. Some protected processes may not expose full information without elevated permissions.
