@@ -1,5 +1,10 @@
 
 
+### 2026-10-19
+
+- Added `tools/Get-TopProcesses.ps1` to list processes sorted by current RAM consumption.
+
+
 ### 2026-10-18
 
 - Added `tools/HealthThresholdReport.ps1` to check saved health reports against configurable RAM and disk-space thresholds.
