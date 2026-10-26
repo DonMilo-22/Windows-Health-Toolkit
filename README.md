@@ -98,3 +98,12 @@ pwsh ./tools/Get-TopProcesses.ps1 -Count 5
 ```
 
 The read-only helper reports process name, RAM in MiB and process ID. Some protected processes may not expose full information without elevated permissions.
+
+
+## Actualización 2026-10-25
+
+- Added `-ExportProcessesCsv` to export the top CPU and memory process lists to one CSV file, with a `Group` column identifying each ranking. Also repaired line breaks in the battery report section.
+
+```powershell
+.\WindowsHealth.ps1 -ExportProcessesCsv .\top-processes.csv
+```
