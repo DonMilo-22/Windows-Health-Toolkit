@@ -1,5 +1,6 @@
 param(
   [string]$ExportJson,
+  [string]$ExportProcessesCsv,
   [ValidateRange(1,50)][int]$Top = 5
 )
 
@@ -58,3 +59,10 @@ $report.TopCPU | Format-Table -AutoSize
 Write-Host "Top $Top memory processes" -ForegroundColor Yellow
 $report.TopMemory | Format-Table -AutoSize
 if ($ExportJson) { $report | ConvertTo-Json -Depth 5 | Set-Content -Path $ExportJson -Encoding UTF8; Write-Host "Report exported to $ExportJson" -ForegroundColor Green }
+
+if ($ExportProcessesCsv) {
+  $processRows = @($report.TopCPU | ForEach-Object { [pscustomobject]@{ Group="CPU"; Name=$_.Name; Id=$_.Id; CPU_s=$_.CPU_s; RAM_MB=$null } })
+  $processRows += @($report.TopMemory | ForEach-Object { [pscustomobject]@{ Group="Memory"; Name=$_.Name; Id=$_.Id; CPU_s=$null; RAM_MB=$_.RAM_MB } })
+  $processRows | Export-Csv -Path $ExportProcessesCsv -NoTypeInformation -Encoding UTF8
+  Write-Host "Process report exported to $ExportProcessesCsv" -ForegroundColor Green
+}
