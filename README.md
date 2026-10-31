@@ -107,3 +107,7 @@ The read-only helper reports process name, RAM in MiB and process ID. Some prote
 ```powershell
 .\WindowsHealth.ps1 -ExportProcessesCsv .\top-processes.csv
 ```
+
+## Actualización 2026-10-30
+
+- Added `-ExportDisksCsv` to export drive names, capacities, free space, and free-space percentages. Example: `.\WindowsHealth.ps1 -ExportDisksCsv .\disks.csv`.
