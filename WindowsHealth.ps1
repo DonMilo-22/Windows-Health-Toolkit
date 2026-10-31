@@ -64,7 +64,12 @@ Write-Host "Top $Top memory processes" -ForegroundColor Yellow
 $report.TopMemory | Format-Table -AutoSize
 if ($ExportJson) { $report | ConvertTo-Json -Depth 5 | Set-Content -Path $ExportJson -Encoding UTF8; Write-Host "Report exported to $ExportJson" -ForegroundColor Green }
 
-if ($ExportDisksCsv) {\n  $report.Disks | Export-Csv -Path $ExportDisksCsv -NoTypeInformation -Encoding UTF8\n  Write-Host "Disk report exported to $ExportDisksCsv" -ForegroundColor Green\n}\n\nif ($ExportProcessesCsv) {
+if ($ExportDisksCsv) {
+  $report.Disks | Export-Csv -Path $ExportDisksCsv -NoTypeInformation -Encoding UTF8
+  Write-Host "Disk report exported to $ExportDisksCsv" -ForegroundColor Green
+}
+
+if ($ExportProcessesCsv) {
   $processRows = @($report.TopCPU | ForEach-Object { [pscustomobject]@{ Group="CPU"; Name=$_.Name; Id=$_.Id; CPU_s=$_.CPU_s; RAM_MB=$null } })
   $processRows += @($report.TopMemory | ForEach-Object { [pscustomobject]@{ Group="Memory"; Name=$_.Name; Id=$_.Id; CPU_s=$null; RAM_MB=$_.RAM_MB } })
   $processRows | Export-Csv -Path $ExportProcessesCsv -NoTypeInformation -Encoding UTF8
