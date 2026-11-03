@@ -1,7 +1,8 @@
 param(
   [string]$ExportJson,
   [string]$ExportProcessesCsv,
-  [string]$ExportDisksCsv,\n  [string]$ExportNetworkCsv,
+  [string]$ExportDisksCsv,
+  [string]$ExportNetworkCsv,
   [ValidateRange(1,50)][int]$Top = 5
 )
 
