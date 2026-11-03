@@ -111,3 +111,7 @@ The read-only helper reports process name, RAM in MiB and process ID. Some prote
 ## Actualización 2026-10-30
 
 - Added `-ExportDisksCsv` to export drive names, capacities, free space, and free-space percentages. Example: `.\WindowsHealth.ps1 -ExportDisksCsv .\disks.csv`.
+
+## Actualización 2026-11-02
+
+- Added `-ExportNetworkCsv` to export detected IPv4 interface names and addresses. Example: `.\WindowsHealth.ps1 -ExportNetworkCsv .\network.csv`.
