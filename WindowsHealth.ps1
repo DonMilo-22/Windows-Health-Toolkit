@@ -1,7 +1,7 @@
 param(
   [string]$ExportJson,
   [string]$ExportProcessesCsv,
-  [string]$ExportDisksCsv,
+  [string]$ExportDisksCsv,\n  [string]$ExportNetworkCsv,
   [ValidateRange(1,50)][int]$Top = 5
 )
 
@@ -64,7 +64,7 @@ Write-Host "Top $Top memory processes" -ForegroundColor Yellow
 $report.TopMemory | Format-Table -AutoSize
 if ($ExportJson) { $report | ConvertTo-Json -Depth 5 | Set-Content -Path $ExportJson -Encoding UTF8; Write-Host "Report exported to $ExportJson" -ForegroundColor Green }
 
-if ($ExportDisksCsv) {
+if ($ExportNetworkCsv) {\n  $report.Network | Export-Csv -Path $ExportNetworkCsv -NoTypeInformation -Encoding UTF8\n  Write-Host "Network report exported to $ExportNetworkCsv" -ForegroundColor Green\n}\n\nif ($ExportDisksCsv) {
   $report.Disks | Export-Csv -Path $ExportDisksCsv -NoTypeInformation -Encoding UTF8
   Write-Host "Disk report exported to $ExportDisksCsv" -ForegroundColor Green
 }
