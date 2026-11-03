@@ -64,7 +64,12 @@ Write-Host "Top $Top memory processes" -ForegroundColor Yellow
 $report.TopMemory | Format-Table -AutoSize
 if ($ExportJson) { $report | ConvertTo-Json -Depth 5 | Set-Content -Path $ExportJson -Encoding UTF8; Write-Host "Report exported to $ExportJson" -ForegroundColor Green }
 
-if ($ExportNetworkCsv) {\n  $report.Network | Export-Csv -Path $ExportNetworkCsv -NoTypeInformation -Encoding UTF8\n  Write-Host "Network report exported to $ExportNetworkCsv" -ForegroundColor Green\n}\n\nif ($ExportDisksCsv) {
+if ($ExportNetworkCsv) {
+  $report.Network | Export-Csv -Path $ExportNetworkCsv -NoTypeInformation -Encoding UTF8
+  Write-Host "Network report exported to $ExportNetworkCsv" -ForegroundColor Green
+}
+
+if ($ExportDisksCsv) {
   $report.Disks | Export-Csv -Path $ExportDisksCsv -NoTypeInformation -Encoding UTF8
   Write-Host "Disk report exported to $ExportDisksCsv" -ForegroundColor Green
 }
