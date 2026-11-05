@@ -3,6 +3,7 @@ param(
   [string]$ExportProcessesCsv,
   [string]$ExportDisksCsv,
   [string]$ExportNetworkCsv,
+  [string]$ExportSystemCsv,
   [ValidateRange(1,50)][int]$Top = 5
 )
 
@@ -64,6 +65,11 @@ $report.TopCPU | Format-Table -AutoSize
 Write-Host "Top $Top memory processes" -ForegroundColor Yellow
 $report.TopMemory | Format-Table -AutoSize
 if ($ExportJson) { $report | ConvertTo-Json -Depth 5 | Set-Content -Path $ExportJson -Encoding UTF8; Write-Host "Report exported to $ExportJson" -ForegroundColor Green }
+
+if ($ExportSystemCsv) {
+  $report | Select-Object GeneratedAt,Computer,Windows,Version,CPU,LogicalProcessors,RAM_GB,RAM_Free_GB,RAM_Used_Percent | Export-Csv -Path $ExportSystemCsv -NoTypeInformation -Encoding UTF8
+  Write-Host "System summary exported to $ExportSystemCsv" -ForegroundColor Green
+}
 
 if ($ExportNetworkCsv) {
   $report.Network | Export-Csv -Path $ExportNetworkCsv -NoTypeInformation -Encoding UTF8
