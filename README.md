@@ -115,3 +115,7 @@ The read-only helper reports process name, RAM in MiB and process ID. Some prote
 ## Actualización 2026-11-02
 
 - Added `-ExportNetworkCsv` to export detected IPv4 interface names and addresses. Example: `.\WindowsHealth.ps1 -ExportNetworkCsv .\network.csv`.
+
+## Actualización 2026-11-04
+
+- Added `-ExportSystemCsv` to save a compact CSV with the computer, Windows version, CPU, logical processor count, and RAM summary. Example: `.\WindowsHealth.ps1 -ExportSystemCsv .\system.csv`.
